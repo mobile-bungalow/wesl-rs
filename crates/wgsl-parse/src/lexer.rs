@@ -478,6 +478,14 @@ pub enum Token {
     #[regex(r#"0[xX]\.[\da-fA-F]+[pP][+-]?\d+lf"#, parse_hex_f64)]
     #[regex(r#"0[xX][\da-fA-F]+[pP][+-]?\d+lf"#, parse_hex_f64)]
     F64(f64),
+
+    // String literal (for custom attributes)
+    #[regex(r#""([^"\\]|\\.)*""#, |lex| {
+        let s = lex.slice();
+        s[1..s.len()-1].to_string()
+    })]
+    StringLiteral(String),
+
     TemplateArgsStart,
     TemplateArgsEnd,
 
@@ -705,6 +713,7 @@ impl Display for Token {
             Token::U64(n) => write!(f, "{n}lu"),
             #[cfg(feature = "naga-ext")]
             Token::F64(n) => write!(f, "{n}lf"),
+            Token::StringLiteral(s) => write!(f, "\"{s}\""),
             Token::TemplateArgsStart => f.write_str("start of template"),
             Token::TemplateArgsEnd => f.write_str("end of template"),
             #[cfg(feature = "imports")]

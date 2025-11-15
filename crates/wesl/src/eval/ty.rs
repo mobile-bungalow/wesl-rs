@@ -76,6 +76,9 @@ impl EvalTy for LiteralExpression {
             LiteralExpression::U64(_) => Ok(Type::U64),
             #[cfg(feature = "naga-ext")]
             LiteralExpression::F64(_) => Ok(Type::F64),
+            LiteralExpression::String(_) => Err(E::Builtin(
+                "string literals are only valid in custom attributes",
+            )),
         }
     }
 }

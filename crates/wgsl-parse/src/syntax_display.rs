@@ -379,6 +379,7 @@ impl Display for LiteralExpression {
             LiteralExpression::U64(num) => write!(f, "{num}lu"),
             #[cfg(feature = "naga-ext")]
             LiteralExpression::F64(num) => write!(f, "{num}lf"),
+            LiteralExpression::String(s) => write!(f, "\"{s}\""),
         }
     }
 }

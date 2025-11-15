@@ -397,7 +397,7 @@ pub type ExpressionNode = Spanned<Expression>;
 
 #[cfg_attr(feature = "tokrepr", derive(TokRepr))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone, Copy, Debug, PartialEq, From, IsVariant, Unwrap)]
+#[derive(Clone, Debug, PartialEq, From, IsVariant, Unwrap)]
 pub enum LiteralExpression {
     Bool(bool),
     AbstractInt(i64),
@@ -416,6 +416,8 @@ pub enum LiteralExpression {
     #[cfg(feature = "naga-ext")]
     #[from(skip)]
     F64(f64),
+    #[from(skip)]
+    String(String),
 }
 
 #[cfg_attr(feature = "tokrepr", derive(TokRepr))]

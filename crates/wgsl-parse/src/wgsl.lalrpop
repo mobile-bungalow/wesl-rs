@@ -99,6 +99,7 @@ extern {
         TokU32 => Token::U32(<u32>),
         TokF32 => Token::F32(<f32>),
         TokF16 => Token::F16(<f32>),
+        TokStringLiteral => Token::StringLiteral(<String>),
         TokTemplateArgsStart => Token::TemplateArgsStart,
         TokTemplateArgsEnd => Token::TemplateArgsEnd,
 
@@ -224,6 +225,7 @@ pub Literal: LiteralExpression = {
     TokU64 => LiteralExpression::U64(<>),
     #[cfg(feature = "naga-ext")]
     TokF64 => LiteralExpression::F64(<>),
+    TokStringLiteral => LiteralExpression::String(<>),
     BoolLiteral,
 };
 

@@ -73,6 +73,9 @@ impl Eval for LiteralExpression {
             LiteralExpression::U64(l) => Ok(LiteralInstance::U64(*l).into()),
             #[cfg(feature = "naga-ext")]
             LiteralExpression::F64(l) => Ok(LiteralInstance::F64(*l).into()),
+            LiteralExpression::String(_) => Err(E::Builtin(
+                "string literals are only valid in custom attributes",
+            )),
         }
     }
 }
