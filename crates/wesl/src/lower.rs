@@ -25,7 +25,7 @@ pub fn lower(wesl: &mut TranslationUnit) -> Result<(), Error> {
     wesl.imports.clear();
 
     for attrs in Visit::<Attributes>::visit_mut(wesl) {
-        attrs.retain(|attr| !matches!(attr.node(), Attribute::Custom(CustomAttribute { .. })))
+        attrs.retain(|attr| !matches!(attr.node(), Attribute::Custom(_)))
     }
 
     #[cfg(not(feature = "eval"))]
